@@ -28,7 +28,7 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_KEY }}
         script: |
-          cd ~/DURIAN_CLASSIFIER_PROJECT
+          cd ~
           docker build -t durianclassifierapi .
           docker stop durianclassifierapi || true
           docker rm durianclassifierapi || true
