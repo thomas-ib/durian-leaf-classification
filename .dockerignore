@@ -1,0 +1,34 @@
+# Git-related
+.git/
+.gitignore
+.github/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.DS_Store
+
+# Local environment/configs
+.env
+*.bak
+*.old
+*.zip
+
+# Files not needed in the image
+readme.txt
+*.pth
+*.pub
+github-actions
+best_resnet18_durian_leaf.pth
+
+# OS / IDE stuff
+.vscode/
+.idea/

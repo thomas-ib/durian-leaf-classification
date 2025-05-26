@@ -8,6 +8,8 @@ import io
 import onnxruntime as ort
 import numpy as np
 
+API_TOKEN = "TEST_T0KEN_101000"
+
 app = Flask(__name__)
 class_names = ['Bawor', 'DuriHitam', 'MusangKing', 'SuperTembaga']
 
@@ -24,7 +26,10 @@ transform = transforms.Compose([
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    print("📥 Received request")
+    # Check for Authorization header
+    token = request.headers.get('Authorization')
+    if token != f"Bearer {API_TOKEN}":
+        return jsonify({'error': 'Unauthorized'}), 401
 
     if 'image' not in request.files:
         return jsonify({'error': 'No image uploaded'}), 400
