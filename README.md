@@ -1,18 +1,50 @@
-# 🍃 Durian Leaf Classifier API
+# 🍃 Durian Leaf Classifier API (Flask + ONNX)
 
-This project is a lightweight Flask API that classifies durian leaf images into one of several varieties using a fine-tuned `ResNet18` deep learning model. It has been optimized for deployment with Docker, secured with token-based access, and supports efficient inference using ONNX.
+This project is a lightweight, Dockerized Flask API that classifies durian tree leaves into one of several known varieties. It uses a fine-tuned ResNet18 model for image classification, converted to ONNX for fast CPU inference and reduced deployment size.
 
 ---
 
-## 🧠 Model
+## 🧠 Model Details
 
-- Backbone: `ResNet18`
-- Trained with PyTorch and exported to ONNX
-- Classifies images into:
+### 📚 Architecture
+- **Base Model**: `ResNet18` (pretrained on ImageNet via `torchvision.models`)
+- **Modified Layer**:
+  - Final `fc` layer changed from `nn.Linear(512, 1000)` → `nn.Linear(512, 4)`
+- **Classes**:
   - `Bawor`
   - `DuriHitam`
   - `MusangKing`
   - `SuperTembaga`
+
+### 🔧 Fine-Tuning Strategy
+- **Backbone Layers**:
+  - Layers `layer3`, `layer4`, and `fc` were **unfrozen**
+  - Earlier layers were **frozen** to retain general visual features
+- **Data Augmentation**:
+  - `RandomResizedCrop`, `ColorJitter`, `RandomRotation`, `HorizontalFlip`
+- **Loss Function**: CrossEntropyLoss
+- **Optimizer**: Adam
+- **Scheduler**: `ReduceLROnPlateau`
+- **Early Stopping**: Monitored validation loss
+- **Best Model Saved**: Based on lowest `val_loss`
+
+---
+
+## 🔁 Conversion to ONNX
+
+The fine-tuned model was exported to ONNX using:
+
+```python
+torch.onnx.export(
+    model,
+    dummy_input,
+    "durian_classifier.onnx",
+    input_names=["input"],
+    output_names=["output"],
+    dynamic_axes={"input": {0: "batch_size"}, "output": {0: "batch_size"}},
+    opset_version=11
+)
+```
 
 ---
 
