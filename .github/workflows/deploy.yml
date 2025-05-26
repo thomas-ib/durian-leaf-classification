@@ -30,8 +30,8 @@ jobs:
         script: |
           docker stop durianclassifierapi || true
           docker rm durianclassifierapi || true
-          docker pull thomasibudiman/durian-classifier:v1
+          docker pull thomasibudiman/durian-classifier:v2
           docker run -d -p 80:5000 \
           --name durianclassifierapi \
           --cpus="0.5" \
-          thomasibudiman/durian-classifier:v1
+          thomasibudiman/durian-classifier:v2
