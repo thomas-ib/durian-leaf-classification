@@ -60,24 +60,5 @@ def predict():
         print("❌ ERROR:", str(e))
         return jsonify({'error': str(e)}), 500
 
-
-# @app.route('/predict', methods=['POST'])
-# def predict():
-#     if 'image' not in request.files:
-#         return jsonify({'error': 'No image uploaded'}), 400
-
-#     file = request.files['image']
-#     img_bytes = file.read()
-#     image = Image.open(io.BytesIO(img_bytes)).convert('RGB')
-#     input_tensor = transform(image).unsqueeze(0).to(device)
-
-#     with torch.no_grad():
-#         output = model(input_tensor)
-#         _, predicted = torch.max(output, 1)
-#         prediction = class_names[predicted.item()]
-
-#     return jsonify({'prediction': prediction})
-
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
-    # app.run(debug=True)
