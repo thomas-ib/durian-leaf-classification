@@ -18,7 +18,11 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_KEY }}
-        source: "."                       # Copies everything from root of the repo
+        source: |
+          Dockerfile
+          durian_classifier.onnx
+          durian_classifier_app.py
+          requirements.txt
         target: "~/DURIAN_CLASSIFIER_PROJECT"  # Folder on EC2 where app will live
 
     - name: SSH into EC2 and deploy Docker
