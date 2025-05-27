@@ -27,3 +27,7 @@ docker run -d -p 80:5000 \
             --name durianclassifierapi \
             --cpus="0.5" \
             thomasibudiman/durian-classifier:v3
+
+
+# To SSH EC2
+ssh -i ~/.ssh/<api-key>.pem <username>@<server IP address>

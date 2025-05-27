@@ -7,10 +7,18 @@ from PIL import Image
 import io
 import onnxruntime as ort
 import numpy as np
+from flask_cors import CORS
 
 API_TOKEN = "TEST_T0KEN_101000"
 
 app = Flask(__name__)
+
+CORS(app,
+     origins=["http://localhost:5173"],
+     supports_credentials=True,
+     allow_headers=["Content-Type", "Authorization"])
+
+
 class_names = ['Bawor', 'DuriHitam', 'MusangKing', 'SuperTembaga']
 
 # Load ONNX model
