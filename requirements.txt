@@ -2,4 +2,3 @@ flask
 onnxruntime
 torchvision
 Pillow
-flask-cors

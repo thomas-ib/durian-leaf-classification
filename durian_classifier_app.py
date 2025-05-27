@@ -2,21 +2,30 @@ import torch
 import torch.nn as nn
 from torchvision.models import resnet18, ResNet18_Weights
 from torchvision import transforms
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from PIL import Image
 import io
 import onnxruntime as ort
 import numpy as np
-from flask_cors import CORS
 
 API_TOKEN = "TEST_T0KEN_101000"
 
 app = Flask(__name__)
 
-CORS(app,
-     origins=["http://localhost:5173"],
-     supports_credentials=True,
-     allow_headers=["Content-Type", "Authorization"])
+@app.after_request
+def apply_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "https://main.d25fkzbccohr6m.amplifyapp.com"
+    response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
+
+@app.route('/predict', methods=['OPTIONS'])
+def handle_preflight():
+    response = make_response()
+    response.headers["Access-Control-Allow-Origin"] = "https://main.d25fkzbccohr6m.amplifyapp.com"
+    response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    return response
 
 
 class_names = ['Bawor', 'DuriHitam', 'MusangKing', 'SuperTembaga']
