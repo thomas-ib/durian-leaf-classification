@@ -19,7 +19,7 @@ def apply_cors_headers(response):
     response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     return response
 
-@app.route('/predict', methods=['OPTIONS'])
+@app.route('/durian/predict', methods=['OPTIONS'])
 def handle_preflight():
     response = make_response()
     response.headers["Access-Control-Allow-Origin"] = "https://main.d25fkzbccohr6m.amplifyapp.com"
@@ -41,7 +41,7 @@ transform = transforms.Compose([
                          [0.229, 0.224, 0.225])
 ])
 
-@app.route('/predict', methods=['POST'])
+@app.route('/durian/predict', methods=['POST'])
 def predict():
     # Check for Authorization header
     token = request.headers.get('Authorization')
