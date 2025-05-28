@@ -30,6 +30,16 @@ This project is a lightweight, Dockerized Flask API that classifies durian tree 
 
 ---
 
+### 📂 Dataset
+
+This project uses the **Durian Leaf** dataset provided on Kaggle:
+
+> Dix2kurni. (2023). *Durian Leaf*. Kaggle. [https://www.kaggle.com/datasets/dix2kurni/durian-leaf](https://www.kaggle.com/datasets/dix2kurni/durian-leaf)
+
+The dataset contains labeled images of durian leaf types, which were used for training and evaluation of the classification model.
+
+---
+
 ## 🔁 Conversion to ONNX
 
 The fine-tuned model was exported to ONNX using:
