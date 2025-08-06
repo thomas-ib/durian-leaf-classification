@@ -28,6 +28,15 @@ This project is a lightweight, Dockerized Flask API that classifies durian tree 
 - **Early Stopping**: Monitored validation loss
 - **Best Model Saved**: Based on lowest `val_loss`
 
+### ✅ Model Performance
+
+- **Dataset Size**: 1,530 images  
+- **Train/Validation Split**: 80/20  
+- **Validation Accuracy**: **~98%**  
+- **Epochs Trained**: 6  
+- **Peak Accuracy**: Achieved at epoch 5  
+- The model shows strong generalization with minimal overfitting.
+
 ---
 
 ### 📂 Dataset
